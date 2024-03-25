@@ -1,11 +1,25 @@
-import { userDetails } from "./types";
+import mysql, { PoolConnection } from "mysql2";
 
+export class MySqlConfig {
+    private pool: mysql.Pool;
 
-export function sayHello(params: userDetails) {
-    if (params.age) {
-        console.log(`your Age is: ${params.age} `);
+    constructor(connectionString: string) {
+        if (!connectionString) {
+            throw new Error('Connection string is required.');
+        }
+        this.pool = mysql.createPool(connectionString);
     }
-    if (params.name) {
-        console.log(`your Name is: ${params.name} `);
+
+    async importTable(query: string): Promise<any> {
+        await this.pool.getConnection(async (err, result) => {
+            try {
+                return await result.query(query);;
+            } catch (error) {
+                console.error('Error executing query:', error);
+                throw error;
+            } finally {
+                result.release(); // Release the connection back to the pool
+            }
+        });
     }
 }
