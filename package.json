@@ -1,0 +1,23 @@
+{
+  "name": "arithmatic_npm_package",
+  "version": "0.0.1",
+  "description": "",
+  "main": ".dist/index.js",
+  "module": ".dist/index.mjs",
+  "types": ".dist/index.d.js",
+  "repository": {
+    "url": "https://github.com/muraliranjith/SamplePackageProject.git"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "murali",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3"
+  }
+}
